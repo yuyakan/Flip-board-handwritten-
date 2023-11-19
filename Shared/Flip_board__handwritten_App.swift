@@ -24,6 +24,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         requestIDFA()
         return true
     }
+    
+    static var orientationLock = UIInterfaceOrientationMask.portrait
+        // 設定の変更通知がされた時に呼ばれるデリゲート
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationLock
+    }
 }
 
 @main
