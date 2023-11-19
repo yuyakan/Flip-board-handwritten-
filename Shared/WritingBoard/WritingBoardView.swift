@@ -22,11 +22,9 @@ struct WritingBoardView: View {
     
     var body: some View {
         let bounds = UIScreen.main.bounds
-        let height = Double(bounds.height)
         let width = Double(bounds.width)
             
         VStack(spacing: 0){
-            //            AdView().frame(width: 320, height: 50)
             Spacer()
             HStack{
                 Button(action: {
@@ -94,11 +92,5 @@ struct WritingBoardView: View {
         .onDisappear {
             pencilKitViewController.unregister()
         }
-    }
-}
-
-struct WritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingBoardView(imageName: "brick")
     }
 }
