@@ -24,6 +24,8 @@
 		4B93F91A2833CC0A0076288F /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F9182833CC0A0076288F /* AdView.swift */; };
 		4B93F91C2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
 		4B93F91D2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
+		4BE3E9582B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
+		4BE3E9592B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
 		9F56649C672D0319860A5A84 /* Pods_Flip_board__handwritten___iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,15 @@
 		4B905F6C27CE47650074CC87 /* Flip-board--handwritten---iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flip-board--handwritten---iOS--Info.plist"; sourceTree = "<group>"; };
 		4B93F9182833CC0A0076288F /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		4B93F91B2833CC700076288F /* pencilKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pencilKitViewController.swift; sourceTree = "<group>"; };
+		4BE3E95C2B086822003A4F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E95D2B086824003A4F26 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E9652B0868F2003A4F26 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4BE3E9662B0868F5003A4F26 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E9672B0868F8003A4F26 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E9682B0868FB003A4F26 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E9692B0868FD003A4F26 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4BE3E96A2B086900003A4F26 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E96B2B086903003A4F26 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		983DDB019FA60D0682246A39 /* Pods-Flip board -handwritten- (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (iOS).release.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		D24B90CF871A7377036AA897 /* Pods-Flip board -handwritten- (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (macOS).release.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (macOS)/Pods-Flip board -handwritten- (macOS).release.xcconfig"; sourceTree = "<group>"; };
 		E31A50A1CE830BABC615606A /* Pods-Flip board -handwritten- (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (iOS).debug.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS).debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,8 +117,8 @@
 		4B5AE93E2B067D6800DA7FE6 /* WritingBoard */ = {
 			isa = PBXGroup;
 			children = (
-				4B93F91B2833CC700076288F /* pencilKitViewController.swift */,
 				4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */,
+				4B93F91B2833CC700076288F /* pencilKitViewController.swift */,
 			);
 			path = WritingBoard;
 			sourceTree = "<group>";
@@ -133,6 +144,7 @@
 				4B93F9182833CC0A0076288F /* AdView.swift */,
 				4B7E000D27CCD2DE00783AF4 /* SelectView.swift */,
 				4B5AE93E2B067D6800DA7FE6 /* WritingBoard */,
+				4BE3E95B2B086820003A4F26 /* Localizable.strings */,
 				4B7E000E27CCD2E000783AF4 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -304,6 +316,14 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ja,
+				fr,
+				de,
+				ru,
+				ko,
+				es,
+				"pt-BR",
 			);
 			mainGroup = 4B7E000627CCD2DE00783AF4;
 			productRefGroup = 4B7E001427CCD2E000783AF4 /* Products */;
@@ -324,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B7E003827CCD2E000783AF4 /* Assets.xcassets in Resources */,
+				4BE3E9582B086820003A4F26 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B7E003927CCD2E000783AF4 /* Assets.xcassets in Resources */,
+				4BE3E9592B086820003A4F26 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +495,25 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		4BE3E95B2B086820003A4F26 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4BE3E95C2B086822003A4F26 /* en */,
+				4BE3E95D2B086824003A4F26 /* fr */,
+				4BE3E9652B0868F2003A4F26 /* zh-Hans */,
+				4BE3E9662B0868F5003A4F26 /* de */,
+				4BE3E9672B0868F8003A4F26 /* ja */,
+				4BE3E9682B0868FB003A4F26 /* ko */,
+				4BE3E9692B0868FD003A4F26 /* pt-BR */,
+				4BE3E96A2B086900003A4F26 /* ru */,
+				4BE3E96B2B086903003A4F26 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		4B7E003A27CCD2E000783AF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -606,9 +647,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -641,9 +682,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

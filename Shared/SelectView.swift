@@ -9,45 +9,46 @@ import SwiftUI
 import GoogleMobileAds
 
 struct SelectView: View {
+    let height = UIScreen.main.bounds.height
+    let width = UIScreen.main.bounds.width
     var body: some View {
-        let upperImage = ["whiteboard", "brackboard", "manga", "book", "sky", "star"]
-        let lowerImage = ["brick", "brackboard2", "color", "brick2", "wall", "sky2"]
+        let selectImage = ["selectwhite", "brackboard", "manga", "book", "sky", "star", "brick", "brackboard2", "color", "brick2", "wall", "sky2"]
+        let backImage = ["selectwhite", "brackboard", "manga", "book", "sky", "star", "brick", "brackboard2", "color", "brick2", "wall", "sky2"]
         NavigationView{
-            VStack{
+            HStack{
                 Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                ForEach(0...5, id: \.self) { index in
-                                    GeometryReader { geometry in
-                                        NavigationLink(destination: WritingBoardView(imageName: upperImage[index])) {
-                                            Image("\(upperImage[index])")
-                                            .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 150) / -8), axis: (x: 0, y: 10, 0))
-                                        }
-                                    }
-                                    .frame(width: 180, height: 300)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        ForEach(0...10, id: \.self) { index in
+                            GeometryReader { geometry in
+                                NavigationLink(destination: 
+                                    WritingBoardView(imageName: backImage[index])
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                ) {
+                                    Image("\(selectImage[index])")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.height / 1.4)
+                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minY) - height/2.4) / -8), axis: (x: -5, y: 0, 0))
                                 }
                             }
-                            .padding(40)
+                            .frame(height: width/2)
                         }
+                    }.padding(.leading, 10)
+                }
+                .frame(width: width/2)
+                Text(LocalizedStringKey("choose"))
+                    .fixedSize(horizontal: true, vertical: false)
+                    .lineLimit(1)
+                    .frame(width: width / 10)
+                    .font(.largeTitle)
+                    .rotationEffect(Angle.degrees(90))
+                    .padding(10)
                 Spacer()
-                Text("Please select background").font(.largeTitle)
-                Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                ForEach(0...5, id: \.self) { index in
-                                    GeometryReader { geometry in
-                                        NavigationLink(destination: WritingBoardView(imageName: lowerImage[index])) {
-                                            Image("\(lowerImage[index])")
-                                            .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 150) / -8), axis: (x: 0, y: 10, 0))
-                                        }
-                                    }
-                                    .frame(width: 180, height: 300)
-                                }
-                            }
-                            .padding(40)
-                        }
-                Spacer()
-            }.navigationBarHidden(true)
+            }
+            .navigationBarHidden(true)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
