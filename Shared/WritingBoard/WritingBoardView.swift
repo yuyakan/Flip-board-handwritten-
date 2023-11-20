@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PencilKit
+import StoreKit
 
 struct WritingBoardView: View {
     @Environment(\.undoManager) private var undoManager
@@ -18,6 +19,12 @@ struct WritingBoardView: View {
     
     init(imageName: String) {
         self.imageName = imageName
+    }
+    
+    private func requestReview() {
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+        }
     }
     
     var body: some View {
@@ -53,6 +60,7 @@ struct WritingBoardView: View {
                 if isEditModeVisible {
                     Button(action: {
                         pencilKitViewController.register(pkCanvasView)
+                        requestReview()
                         isEditModeVisible = false
                     }, label: {
                         Image(systemName: "square.and.pencil")
@@ -79,9 +87,9 @@ struct WritingBoardView: View {
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: width * 1.5)
+                    .frame(height: width > 700 ? width : width * 1.5)
                 CanvasView(pkcanvasview: self.$pkCanvasView)
-                    .frame(height: width * 1.5)
+                    .frame(height: width > 700 ? width : width * 1.5)
             }
             Spacer()
             Text("").frame(height: 50)

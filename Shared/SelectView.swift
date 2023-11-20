@@ -10,12 +10,12 @@ import GoogleMobileAds
 
 struct SelectView: View {
     @ObservedObject var interstitial = Interstitial()
-    @State var isShowBoardView = [false, false, false, false, false, false, false, false, false, false, false, false]
+    @State var isShowBoardView = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     let height = UIScreen.main.bounds.height
     let width = UIScreen.main.bounds.width
     var body: some View {
-        let selectImage = ["selectwhite", "brackboard", "manga", "book", "sky", "star", "brick", "brackboard2", "color", "brick2", "wall", "sky2"]
-        let backImage = ["selectwhite", "brackboard", "manga", "book", "sky", "star", "brick", "brackboard2", "color", "brick2", "wall", "sky2"]
+        let selectImage = ["selectwhite", "brackboard", "manga", "book", "sky",  "brick", "brackboard2", "brick2", "wall", "moon", "winter", "star", "sky2", "color", "sand"]
+        let backImage = ["selectwhite", "brackboard", "manga", "book", "sky", "brick", "brackboard2", "brick2", "wall", "moon", "winter", "star", "sky2", "color", "sand"]
         NavigationView{
             ZStack {
                 HStack {
@@ -27,7 +27,7 @@ struct SelectView: View {
                     Text("").frame(width: 50)
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 20) {
-                            ForEach(0...10, id: \.self) { index in
+                            ForEach(0...14, id: \.self) { index in
                                 GeometryReader { geometry in
                                     NavigationLink(destination:
                                                     WritingBoardView(imageName: backImage[index])
@@ -40,7 +40,7 @@ struct SelectView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: geometry.size.height / 1.4)
-                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minY) - height/2.4) / -8), axis: (x: -5, y: 0, 0))
+                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minY) - height/2.5) / -8), axis: (x: -5, y: 0, 0))
                                         .onTapGesture {
                                             interstitial.presentInterstitial(isShow: &isShowBoardView[index])
                                         }
@@ -48,7 +48,7 @@ struct SelectView: View {
                                 }
                                 .frame(height: width/2)
                             }
-                        }.padding(.leading, 10)
+                        }.padding(.leading, 30)
                     }
                     .frame(width: width/2)
                     Text(LocalizedStringKey("choose"))
@@ -57,8 +57,8 @@ struct SelectView: View {
                         .frame(width: width / 10)
                         .font(.largeTitle)
                         .rotationEffect(Angle.degrees(90))
-                        .padding(.trailing, 10)
-                    Text("").frame(width: 30)
+                        .padding(.trailing, 40)
+                        .padding(.leading, 10)
                     Spacer()
                 }
                 .onAppear() {
