@@ -9,45 +9,63 @@ import SwiftUI
 import GoogleMobileAds
 
 struct SelectView: View {
+    @ObservedObject var interstitial = Interstitial()
+    @State var isShowBoardView = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    let height = UIScreen.main.bounds.height
+    let width = UIScreen.main.bounds.width
     var body: some View {
-        let upperImage = ["whiteboard", "brackboard", "manga", "book", "sky", "star"]
-        let lowerImage = ["brick", "brackboard2", "color", "brick2", "wall", "sky2"]
+        let selectImage = ["selectwhite", "brackboard", "manga", "book", "sky",  "brick", "brackboard2", "brick2", "wall", "moon", "winter", "star", "sky2", "color", "sand"]
+        let backImage = ["selectwhite", "brackboard", "manga", "book", "sky", "brick", "brackboard2", "brick2", "wall", "moon", "winter", "star", "sky2", "color", "sand"]
         NavigationView{
-            VStack{
-                Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                ForEach(0...5, id: \.self) { index in
-                                    GeometryReader { geometry in
-                                        NavigationLink(destination: WritingBoardView(imageName: upperImage[index])) {
-                                            Image("\(upperImage[index])")
-                                            .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 150) / -8), axis: (x: 0, y: 10, 0))
+            ZStack {
+                HStack {
+                    AdView().frame(width: 320, height: 50).rotationEffect(Angle(degrees: 90))
+                    Text("").frame(width: width - 90)
+                }
+                HStack{
+                    Spacer()
+                    Text("").frame(width: 50)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 20) {
+                            ForEach(0...14, id: \.self) { index in
+                                GeometryReader { geometry in
+                                    NavigationLink(destination:
+                                                    WritingBoardView(imageName: backImage[index])
+                                                        .navigationBarTitleDisplayMode(.inline)
+                                                        .navigationBarHidden(true)
+                                                        .navigationBarBackButtonHidden(true),
+                                                   isActive: $isShowBoardView[index]
+                                    ) { EmptyView() }
+                                    Image("\(selectImage[index])")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.height / 1.4)
+                                        .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minY) - height/2.5) / -8), axis: (x: -5, y: 0, 0))
+                                        .onTapGesture {
+                                            interstitial.presentInterstitial(isShow: &isShowBoardView[index])
                                         }
-                                    }
-                                    .frame(width: 180, height: 300)
+                                    
                                 }
+                                .frame(height: width/2)
                             }
-                            .padding(40)
-                        }
-                Spacer()
-                Text("Please select background").font(.largeTitle)
-                Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                ForEach(0...5, id: \.self) { index in
-                                    GeometryReader { geometry in
-                                        NavigationLink(destination: WritingBoardView(imageName: lowerImage[index])) {
-                                            Image("\(lowerImage[index])")
-                                            .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minX) - 150) / -8), axis: (x: 0, y: 10, 0))
-                                        }
-                                    }
-                                    .frame(width: 180, height: 300)
-                                }
-                            }
-                            .padding(40)
-                        }
-                Spacer()
-            }.navigationBarHidden(true)
+                        }.padding(.leading, 30)
+                    }
+                    .frame(width: width/2)
+                    Text(LocalizedStringKey("choose"))
+                        .fixedSize(horizontal: true, vertical: false)
+                        .lineLimit(1)
+                        .frame(width: width / 10)
+                        .font(.largeTitle)
+                        .rotationEffect(Angle.degrees(90))
+                        .padding(.trailing, 40)
+                        .padding(.leading, 10)
+                    Spacer()
+                }
+                .onAppear() {
+                    interstitial.loadInterstitial()
+                }
+                .navigationBarHidden(true)
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
