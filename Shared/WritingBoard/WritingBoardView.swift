@@ -9,96 +9,446 @@ import SwiftUI
 import PencilKit
 import StoreKit
 
+// MARK: - Board Mode
+
+enum BoardMode {
+    case draw, text, display
+}
+
+// MARK: - Orientation helpers
+
+private func rotateToPortrait() {
+    AppDelegate.orientationLock = .portrait
+    if #available(iOS 16.0, *) {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+        scene.windows.first?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+    } else {
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
+}
+
+private func rotateToLandscape() {
+    AppDelegate.orientationLock = .landscapeRight
+    if #available(iOS 16.0, *) {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+        scene.windows.first?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+    } else {
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
+}
+
+// MARK: - WritingBoardView
+
 struct WritingBoardView: View {
     @Environment(\.undoManager) private var undoManager
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @FocusedValue(\.myBoolData) var isTextFocused
+
     @StateObject private var pencilKitViewController = PencilKitViewController()
-    @State var pkCanvasView = PKCanvasView()
-    @State var isEditModeVisible = false
-    let imageName: String
-    
+    @State private var pkCanvasView: PKCanvasView = {
+        let canvas = PKCanvasView()
+        canvas.isOpaque = false
+        canvas.backgroundColor = .clear
+        return canvas
+    }()
+    @State private var boardMode: BoardMode = .draw
+    @State private var textElements: [TextElementModel] = []
+    @State private var customBackground: UIImage?
+    @State private var isShowingPhotoPicker = false
+    @State private var penKind: PenKind = .monoline
+    @State private var penColor: Color = .black
+    @State private var penWidth: CGFloat = 5
+    @State private var isPenKindExpanded: Bool = false
+
+    private let imageName: String?
+    private let initialCustomBackground: UIImage?
+
     init(imageName: String) {
         self.imageName = imageName
+        self.initialCustomBackground = nil
     }
-    
-    private func requestReview() {
-        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: scene)
-        }
+
+    init(customBackground: UIImage) {
+        self.imageName = nil
+        self.initialCustomBackground = customBackground
     }
-    
+
+    // MARK: - Body
+
     var body: some View {
-        let bounds = UIScreen.main.bounds
-        let width = Double(bounds.width)
-            
-        VStack(spacing: 0){
-            Spacer()
-            HStack{
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    Image(systemName:"square.stack.3d.up")
-                        .font(.system(size: 24))
-                        .rotationEffect(Angle.degrees(180))
-                        .padding(.leading, 6)
-                })
-                Spacer()
-                Button(action: {
-                    undoManager?.undo()
-                }, label: {
-                    Image(systemName:"arrow.uturn.backward.circle")
-                        .font(.system(size: 26))
-                        .rotationEffect(Angle.degrees(90))
-                })
-                Button(action: {
-                    undoManager?.redo()
-                }, label: {
-                    Image(systemName:"arrow.uturn.forward.circle")
-                        .font(.system(size: 26))
-                        .rotationEffect(Angle.degrees(90))
-                })
-                if isEditModeVisible {
-                    Button(action: {
-                        pencilKitViewController.register(pkCanvasView)
-                        requestReview()
-                        isEditModeVisible = false
-                    }, label: {
-                        Image(systemName: "square.and.pencil")
-                            .font(.system(size: 24))
-                            .frame(width: 34)
-                            .rotationEffect(Angle.degrees(90))
-                            .padding(.trailing, 6)
-                    })
-                } else {
-                    Button(action: {
-                        pencilKitViewController.unregister()
-                        isEditModeVisible = true
-                    }, label: {
-                        Image(systemName: "display")
-                            .font(.system(size: 24))
-                            .rotationEffect(Angle.degrees(90))
-                            .padding(.trailing, 6)
-                    })
+        GeometryReader { geo in
+            let isLandscape = geo.size.width > geo.size.height
+            if isLandscape {
+                HStack(spacing: 0) {
+                    sideToolbar
+                        .padding(.leading, geo.safeAreaInsets.leading)
+                    canvasArea(isLandscape: true)
+                        .overlay(alignment: .trailing) {
+                            Group {
+                                switch boardMode {
+                                case .draw:
+                                    penPalette
+                                case .text:
+                                    addTextButton
+                                case .display:
+                                    EmptyView()
+                                }
+                            }
+                            .padding(.trailing, max(geo.safeAreaInsets.trailing, 8))
+                        }
+                }
+                .frame(width: geo.size.width + geo.safeAreaInsets.leading + geo.safeAreaInsets.trailing,
+                       height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom)
+                .offset(x: -geo.safeAreaInsets.leading, y: -geo.safeAreaInsets.top)
+            } else {
+                VStack(spacing: 0) {
+                    topToolbar
+                    canvasArea(isLandscape: false)
                 }
             }
-            .padding(.top, 10)
-            Spacer()
-            ZStack {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: width > 700 ? width : width * 1.5)
-                CanvasView(pkcanvasview: self.$pkCanvasView)
-                    .frame(height: width > 700 ? width : width * 1.5)
-            }
-            Spacer()
-            Text("").frame(height: 50)
         }
+        .background(Color(.systemBackground))
+        .ignoresSafeArea(.keyboard)
+        .navigationBarHidden(true)
         .onAppear {
+            customBackground = initialCustomBackground
             pencilKitViewController.register(pkCanvasView)
+            applyPenTool()
+            rotateToLandscape()
         }
         .onDisappear {
             pencilKitViewController.unregister()
+            rotateToPortrait()
         }
+        .onChange(of: boardMode) { newMode in
+            switch newMode {
+            case .draw:
+                pencilKitViewController.register(pkCanvasView)
+                applyPenTool()
+            case .text, .display:
+                pencilKitViewController.unregister()
+            }
+        }
+        .onChange(of: penKind) { _ in applyPenTool() }
+        .onChange(of: penColor) { _ in applyPenTool() }
+        .onChange(of: penWidth) { _ in applyPenTool() }
+        .sheet(isPresented: $isShowingPhotoPicker) {
+            PhotoPickerView(selectedImage: $customBackground)
+        }
+    }
+
+    private func applyPenTool() {
+        pencilKitViewController.apply(
+            kind: penKind,
+            color: UIColor(penColor),
+            width: penWidth
+        )
+    }
+
+    // MARK: - Top Toolbar（縦向き・上部水平）
+
+    private var topToolbar: some View {
+        HStack(spacing: 4) {
+            Button(action: { dismiss() }) {
+                Image(systemName: "square.stack.3d.up")
+                    .font(.system(size: 22))
+                    .rotationEffect(.degrees(90))
+            }
+            .padding(.leading, 8)
+
+            Divider().frame(height: 22).padding(.horizontal, 4)
+
+            Button(action: { undoManager?.undo() }) {
+                Image(systemName: "arrow.uturn.backward")
+                    .font(.system(size: 20))
+                    .rotationEffect(.degrees(90))
+            }
+            .disabled(boardMode == .display)
+
+            Button(action: { undoManager?.redo() }) {
+                Image(systemName: "arrow.uturn.forward")
+                    .font(.system(size: 20))
+                    .rotationEffect(.degrees(90))
+            }
+            .disabled(boardMode == .display)
+
+            Spacer()
+
+            HStack(spacing: 0) {
+                modeButton(icon: "pencil.tip", mode: .draw, rotation: 90)
+                modeButton(icon: "character.cursor.ibeam", mode: .text, rotation: 90)
+                modeButton(icon: "eye", mode: .display, rotation: 90)
+            }
+            .background(Color(.secondarySystemBackground))
+            .clipShape(Capsule())
+
+            Spacer()
+
+            Button(action: { isShowingPhotoPicker = true }) {
+                Image(systemName: "photo.badge.plus")
+                    .font(.system(size: 22))
+                    .rotationEffect(.degrees(90))
+            }
+
+            if boardMode == .text {
+                Button(action: addTextElement) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 22))
+                        .rotationEffect(.degrees(90))
+                }
+                .disabled(isTextFocused ?? false)
+                .opacity((isTextFocused ?? false) ? 0.3 : 1)
+                .padding(.trailing, 8)
+            } else {
+                Color.clear.frame(width: 30, height: 30).padding(.trailing, 8)
+            }
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 4)
+        .background(.ultraThinMaterial)
+        .foregroundStyle(Color(.label))
+    }
+
+    // MARK: - Side Toolbar（横向き・左端縦置き）
+
+    private var sideToolbar: some View {
+        VStack(spacing: 16) {
+            Button(action: { dismiss() }) {
+                Image(systemName: "square.stack.3d.up")
+                    .font(.system(size: 22))
+            }
+            .padding(.top, 8)
+
+            Divider().frame(width: 22)
+
+            Button(action: { undoManager?.undo() }) {
+                Image(systemName: "arrow.uturn.backward")
+                    .font(.system(size: 20))
+            }
+            .disabled(boardMode == .display)
+
+            Button(action: { undoManager?.redo() }) {
+                Image(systemName: "arrow.uturn.forward")
+                    .font(.system(size: 20))
+            }
+            .disabled(boardMode == .display)
+
+            Spacer()
+
+            VStack(spacing: 0) {
+                modeButton(icon: "pencil.tip", mode: .draw)
+                modeButton(icon: "character.cursor.ibeam", mode: .text)
+                modeButton(icon: "eye", mode: .display)
+            }
+            .background(Color(.secondarySystemBackground))
+            .clipShape(Capsule())
+
+            Spacer()
+
+            Button(action: { isShowingPhotoPicker = true }) {
+                Image(systemName: "photo.badge.plus")
+                    .font(.system(size: 22))
+            }
+
+            Spacer().frame(height: 8)
+        }
+        .padding(.horizontal, 8)
+        .frame(width: 60)
+        .frame(maxHeight: .infinity)
+        .background(.ultraThinMaterial)
+        .foregroundStyle(Color(.label))
+    }
+
+    // MARK: - Canvas Area
+
+    @ViewBuilder
+    private func canvasArea(isLandscape: Bool) -> some View {
+        GeometryReader { geo in
+            ZStack {
+                if isLandscape {
+                    if let img = customBackground {
+                        Image(uiImage: img)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .offset(x: -50)
+                    } else if let name = imageName {
+                        Image("\(name)_landscape")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .offset(x: -50)
+                    }
+                } else {
+                    let canvasHeight: CGFloat = geo.size.width > 700 ? geo.size.width : geo.size.width * 1.5
+                    if let img = customBackground {
+                        Image(uiImage: img)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: canvasHeight)
+                            .clipped()
+                    } else if let name = imageName {
+                        Image(name)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: canvasHeight)
+                    }
+                }
+
+                ForEach($textElements) { $element in
+                    TextOverlayView(
+                        element: $element,
+                        isInteractive: boardMode == .text,
+                        onDelete: { removeElement(element) }
+                    )
+                }
+
+                CanvasView(
+                    pkcanvasview: $pkCanvasView,
+                    isInteractionEnabled: .constant(boardMode == .draw)
+                )
+                .allowsHitTesting(boardMode == .draw)
+            }
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
+        .ignoresSafeArea(edges: isLandscape ? .all : [])
+    }
+
+    // MARK: - Add Text Button（横向き・右端、textモード時のみ）
+
+    private var addTextButton: some View {
+        Button(action: addTextElement) {
+            VStack(spacing: 6) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 40))
+                Text("追加")
+                    .font(.system(size: 13, weight: .semibold))
+            }
+            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
+            .foregroundStyle(Color(.label))
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .disabled(isTextFocused ?? false)
+        .opacity((isTextFocused ?? false) ? 0.3 : 1)
+    }
+
+    // MARK: - Pen Palette（横向き・右端、drawモード時のみ）
+
+    private var penPalette: some View {
+        HStack(alignment: .top, spacing: 8) {
+            if isPenKindExpanded {
+                penKindList
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+            }
+
+            VStack(spacing: 12) {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isPenKindExpanded.toggle()
+                    }
+                } label: {
+                    Image(systemName: penKind.iconName)
+                        .font(.system(size: 20))
+                        .padding(8)
+                        .foregroundStyle(Color(.systemBackground))
+                        .background(Color(.label))
+                        .clipShape(Circle())
+                }
+
+                Divider().frame(width: 28)
+
+                ColorPicker("", selection: $penColor, supportsOpacity: false)
+                    .labelsHidden()
+                    .frame(width: 32, height: 32)
+                    .disabled(penKind == .eraser)
+                    .opacity(penKind == .eraser ? 0.3 : 1)
+
+                VStack(spacing: 4) {
+                    ForEach([CGFloat(2), 5, 10, 18], id: \.self) { w in
+                        Button {
+                            penWidth = w
+                        } label: {
+                            Circle()
+                                .fill(penKind == .eraser ? Color(.systemGray) : penColor)
+                                .frame(width: w + 6, height: w + 6)
+                                .padding(6)
+                                .background(
+                                    Circle()
+                                        .fill(penWidth == w ? Color(.label).opacity(0.15) : Color.clear)
+                                )
+                        }
+                    }
+                }
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 8)
+            .frame(width: 56)
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .foregroundStyle(Color(.label))
+    }
+
+    private var penKindList: some View {
+        VStack(spacing: 12) {
+            ForEach(PenKind.allCases, id: \.self) { kind in
+                penKindButton(kind)
+            }
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 8)
+        .frame(width: 48)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    private func penKindButton(_ kind: PenKind) -> some View {
+        let isActive = penKind == kind
+        return Button {
+            penKind = kind
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isPenKindExpanded = false
+            }
+        } label: {
+            Image(systemName: kind.iconName)
+                .font(.system(size: 18))
+                .padding(6)
+                .foregroundStyle(isActive ? Color(.systemBackground) : Color(.label))
+                .background(isActive ? Color(.label) : Color.clear)
+                .clipShape(Circle())
+        }
+    }
+
+    // MARK: - Mode Button
+
+    private func modeButton(icon: String, mode: BoardMode, rotation: Double = 0) -> some View {
+        let isActive = boardMode == mode
+        return Button(action: { boardMode = mode }) {
+            Image(systemName: icon)
+                .font(.system(size: 18))
+                .rotationEffect(.degrees(rotation))
+                .padding(10)
+                .foregroundStyle(isActive ? Color(.systemBackground) : Color(.label))
+                .background(isActive ? Color(.label) : Color.clear)
+                .clipShape(Circle())
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func addTextElement() {
+        let bounds = UIScreen.main.bounds
+        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 3)
+        textElements.append(TextElementModel(position: center))
+    }
+
+    private func removeElement(_ element: TextElementModel) {
+        textElements.removeAll { $0.id == element.id }
     }
 }

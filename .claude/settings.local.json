@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild *)",
+      "Bash(sudo xcode-select *)",
+      "Bash(/Applications/Xcode-26.3.0.app/Contents/Developer/usr/bin/xcodebuild -version)",
+      "Bash(pod search *)",
+      "Bash(xargs ls *)",
+      "Bash(xargs cat *)",
+      "Bash(python3 *)",
+      "Bash(git *)",
+      "Bash(sips *)",
+      "Bash(open *)",
+      "WebSearch",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:github.com)",
+      "Read(//Users/uebetsunawayuuya/Flip-board/**)",
+      "WebFetch(domain:forums.developer.apple.com)",
+      "WebFetch(domain:www.hackingwithswift.com)"
+    ]
+  }
+}

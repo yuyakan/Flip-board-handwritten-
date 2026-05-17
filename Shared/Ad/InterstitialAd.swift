@@ -38,7 +38,7 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
         let scenes = UIApplication.shared.connectedScenes
         let windowScenes = scenes.first as? UIWindowScene
         let root = windowScenes?.keyWindow?.rootViewController
-        
+
         if let ad = interstitialAd {
             ad.present(fromRootViewController: root!)
             self.interstitialAdLoaded = false
@@ -48,6 +48,21 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
             self.interstitialAdLoaded = false
             self.loadInterstitial()
             isShow = true
+        }
+    }
+
+    func presentInterstitial() {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let root = windowScenes?.keyWindow?.rootViewController
+
+        if let ad = interstitialAd {
+            ad.present(fromRootViewController: root!)
+            self.interstitialAdLoaded = false
+        } else {
+            print("😭: 広告の準備ができていませんでした")
+            self.interstitialAdLoaded = false
+            self.loadInterstitial()
         }
     }
     // 失敗通知
