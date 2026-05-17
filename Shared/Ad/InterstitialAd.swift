@@ -10,8 +10,9 @@ import SwiftUI
 
 class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     @Published var interstitialAdLoaded: Bool = false
-    
+
     var interstitialAd: GADInterstitialAd?
+    private var onDismiss: (() -> Void)?
 
     override init() {
         super.init()
@@ -33,42 +34,31 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
         }
     }
 
-    // インタースティシャル広告の表示
-    func presentInterstitial(isShow: inout Bool) {
+    // インタースティシャル広告の表示（広告閉鎖後に onDismiss を発火）
+    func presentInterstitial(onDismiss: @escaping () -> Void) {
         let scenes = UIApplication.shared.connectedScenes
         let windowScenes = scenes.first as? UIWindowScene
         let root = windowScenes?.keyWindow?.rootViewController
 
-        if let ad = interstitialAd {
-            ad.present(fromRootViewController: root!)
-            self.interstitialAdLoaded = false
-            isShow = true
-        } else {
-            print("😭: 広告の準備ができていませんでした")
-            self.interstitialAdLoaded = false
-            self.loadInterstitial()
-            isShow = true
-        }
-    }
-
-    func presentInterstitial() {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScenes = scenes.first as? UIWindowScene
-        let root = windowScenes?.keyWindow?.rootViewController
-
-        if let ad = interstitialAd {
-            ad.present(fromRootViewController: root!)
+        if let ad = interstitialAd, let root = root {
+            self.onDismiss = onDismiss
+            ad.present(fromRootViewController: root)
             self.interstitialAdLoaded = false
         } else {
             print("😭: 広告の準備ができていませんでした")
             self.interstitialAdLoaded = false
             self.loadInterstitial()
+            onDismiss()
         }
     }
+
     // 失敗通知
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("インタースティシャル広告の表示に失敗しました")
         self.interstitialAdLoaded = false
+        let dismiss = onDismiss
+        onDismiss = nil
+        dismiss?()
         self.loadInterstitial()
     }
 
@@ -82,5 +72,13 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("インタースティシャル広告を閉じました")
         self.interstitialAdLoaded = false
+        self.interstitialAd = nil
+        self.loadInterstitial()
+        // 広告ウィンドウが完全に破棄されてから遷移
+        let dismiss = onDismiss
+        onDismiss = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            dismiss?()
+        }
     }
 }

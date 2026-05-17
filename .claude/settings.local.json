@@ -16,7 +16,9 @@
       "WebFetch(domain:github.com)",
       "Read(//Users/uebetsunawayuuya/Flip-board/**)",
       "WebFetch(domain:forums.developer.apple.com)",
-      "WebFetch(domain:www.hackingwithswift.com)"
+      "WebFetch(domain:www.hackingwithswift.com)",
+      "WebFetch(domain:fatbobman.com)",
+      "WebFetch(domain:sarunw.com)"
     ]
   }
 }

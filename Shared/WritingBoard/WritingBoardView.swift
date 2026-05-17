@@ -46,7 +46,6 @@ private func rotateToLandscape() {
 struct WritingBoardView: View {
     @Environment(\.undoManager) private var undoManager
     @Environment(\.dismiss) private var dismiss
-    @FocusedValue(\.myBoolData) var isTextFocused
 
     @StateObject private var pencilKitViewController = PencilKitViewController()
     @State private var pkCanvasView: PKCanvasView = {
@@ -83,23 +82,23 @@ struct WritingBoardView: View {
         GeometryReader { geo in
             let isLandscape = geo.size.width > geo.size.height
             if isLandscape {
-                HStack(spacing: 0) {
-                    sideToolbar
-                        .padding(.leading, geo.safeAreaInsets.leading)
-                    canvasArea(isLandscape: true)
-                        .overlay(alignment: .trailing) {
-                            Group {
-                                switch boardMode {
-                                case .draw:
-                                    penPalette
-                                case .text:
-                                    addTextButton
-                                case .display:
-                                    EmptyView()
-                                }
-                            }
-                            .padding(.trailing, max(geo.safeAreaInsets.trailing, 8))
+                ZStack(alignment: .trailing) {
+                    HStack(spacing: 0) {
+                        sideToolbar
+                            .padding(.leading, geo.safeAreaInsets.leading)
+                        canvasArea(isLandscape: true)
+                    }
+                    Group {
+                        switch boardMode {
+                        case .draw:
+                            penPalette
+                        case .text:
+                            addTextButton
+                        case .display:
+                            EmptyView()
                         }
+                    }
+                    .padding(.trailing, max(geo.safeAreaInsets.trailing, 8))
                 }
                 .frame(width: geo.size.width + geo.safeAreaInsets.leading + geo.safeAreaInsets.trailing,
                        height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom)
@@ -200,8 +199,6 @@ struct WritingBoardView: View {
                         .font(.system(size: 22))
                         .rotationEffect(.degrees(90))
                 }
-                .disabled(isTextFocused ?? false)
-                .opacity((isTextFocused ?? false) ? 0.3 : 1)
                 .padding(.trailing, 8)
             } else {
                 Color.clear.frame(width: 30, height: 30).padding(.trailing, 8)
@@ -299,19 +296,24 @@ struct WritingBoardView: View {
                     }
                 }
 
-                ForEach($textElements) { $element in
-                    TextOverlayView(
-                        element: $element,
-                        isInteractive: boardMode == .text,
-                        onDelete: { removeElement(element) }
-                    )
-                }
-
                 CanvasView(
                     pkcanvasview: $pkCanvasView,
                     isInteractionEnabled: .constant(boardMode == .draw)
                 )
                 .allowsHitTesting(boardMode == .draw)
+
+                ForEach(textElements) { element in
+                    let elementID = element.id
+                    TextOverlayView(
+                        id: elementID,
+                        isInteractive: boardMode == .text,
+                        onDelete: {
+                            DispatchQueue.main.async {
+                                textElements.removeAll { $0.id == elementID }
+                            }
+                        }
+                    )
+                }
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
@@ -334,8 +336,6 @@ struct WritingBoardView: View {
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
-        .disabled(isTextFocused ?? false)
-        .opacity((isTextFocused ?? false) ? 0.3 : 1)
     }
 
     // MARK: - Pen Palette（横向き・右端、drawモード時のみ）
@@ -443,12 +443,6 @@ struct WritingBoardView: View {
     // MARK: - Helpers
 
     private func addTextElement() {
-        let bounds = UIScreen.main.bounds
-        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 3)
-        textElements.append(TextElementModel(position: center))
-    }
-
-    private func removeElement(_ element: TextElementModel) {
-        textElements.removeAll { $0.id == element.id }
+        textElements.append(TextElementModel())
     }
 }

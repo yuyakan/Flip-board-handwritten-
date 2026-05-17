@@ -20,21 +20,21 @@ struct CanvasView: UIViewRepresentable {
         pkcanvasview.panGestureRecognizer.isEnabled = false
         pkcanvasview.pinchGestureRecognizer?.isEnabled = false
         pkcanvasview.drawingGestureRecognizer.isEnabled = isInteractionEnabled
+        pkcanvasview.isUserInteractionEnabled = isInteractionEnabled
         clearBackground(pkcanvasview)
-        pkcanvasview.becomeFirstResponder()
+        if isInteractionEnabled {
+            pkcanvasview.becomeFirstResponder()
+        }
         return pkcanvasview
     }
 
     func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        uiView.isOpaque = false
-        uiView.backgroundColor = .clear
-        uiView.drawingPolicy = .anyInput
-        uiView.isScrollEnabled = false
-        uiView.panGestureRecognizer.isEnabled = false
-        uiView.pinchGestureRecognizer?.isEnabled = false
-        uiView.drawingGestureRecognizer.isEnabled = isInteractionEnabled
-        clearBackground(uiView)
-        uiView.isUserInteractionEnabled = isInteractionEnabled
+        if uiView.drawingGestureRecognizer.isEnabled != isInteractionEnabled {
+            uiView.drawingGestureRecognizer.isEnabled = isInteractionEnabled
+        }
+        if uiView.isUserInteractionEnabled != isInteractionEnabled {
+            uiView.isUserInteractionEnabled = isInteractionEnabled
+        }
     }
 
     private func clearBackground(_ view: UIView) {
@@ -91,6 +91,7 @@ class PencilKitViewController: ObservableObject {
     }
 
     func unregister() {
+        self.pkCanvasView?.resignFirstResponder()
         self.pkCanvasView = nil
     }
 

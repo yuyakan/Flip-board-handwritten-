@@ -7,40 +7,26 @@
 
 import SwiftUI
 
-// MARK: - FocusedValueKey（ツールバーの＋ボタン制御用）
-
-struct MyFocusedDataKey: FocusedValueKey {
-    typealias Value = Bool
-}
-
-extension FocusedValues {
-    var myBoolData: MyFocusedDataKey.Value? {
-        get { self[MyFocusedDataKey.self] }
-        set { self[MyFocusedDataKey.self] = newValue }
-    }
-}
-
 // MARK: - TextElementModel
 
 struct TextElementModel: Identifiable {
     let id = UUID()
-    var text: String = ""
-    var color: Color = .yellow
-    var fontSelection: Int = 1
-    var position: CGPoint = CGPoint(x: 150, y: 150)
-    var scale: CGFloat = 1.0
 }
 
 // MARK: - TextOverlayView
 
-struct TextOverlayView: View {
-    @Binding var element: TextElementModel
+struct TextOverlayView: View, Identifiable {
+    let id: UUID
     var isInteractive: Bool
     var onDelete: () -> Void
 
-    @FocusState private var isActive: Bool
+    @State private var location: CGPoint = CGPoint(x: 200, y: 150)
+    @State private var text: String = ""
+    @State private var color: Color = .yellow
+    @State private var fontSelection: Int = 1
+    @State private var scale: CGFloat = 1.0
     @State private var lastMagnification: CGFloat = 1.0
-    @State private var location: CGPoint = .zero
+    @FocusState private var isActive: Bool
 
     private let fonts: [Font.Design] = [.default, .rounded, .serif, .monospaced]
     private let weights: [Font.Weight] = [.light, .black, .regular, .bold]
@@ -48,42 +34,47 @@ struct TextOverlayView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TextField("", text: $element.text)
+            TextField("", text: $text)
                 .focused($isActive, equals: true)
-                .focusedValue(\.myBoolData, isActive)
-                .font(.system(size: baseSize, weight: weights[element.fontSelection], design: fonts[element.fontSelection]))
+                .font(.system(size: baseSize, weight: weights[fontSelection], design: fonts[fontSelection]))
                 .fixedSize(horizontal: true, vertical: false)
-                .foregroundColor(element.color)
+                .foregroundColor(color)
                 .disabled(!isInteractive)
+                .onTapGesture {
+                    if isInteractive {
+                        isActive = true
+                    }
+                }
 
-            if isInteractive && isActive {
-                editingControls
-                    .transition(.opacity)
-            }
+            editingControls
+                .opacity(isInteractive && isActive ? 1 : 0)
+                .allowsHitTesting(isInteractive && isActive)
         }
-        .scaleEffect(element.scale)
+        .scaleEffect(scale)
         .position(location)
         .highPriorityGesture(dragGesture)
-        .gesture(magnificationGesture)
+        .simultaneousGesture(magnificationGesture)
         .allowsHitTesting(isInteractive)
         .onAppear {
-            location = element.position
             if isInteractive {
                 isActive = true
             }
         }
     }
 
-    // MARK: Editing controls (visible when active in text mode)
+    // MARK: Editing controls
     private var editingControls: some View {
         HStack(spacing: 8) {
-            Button(action: onDelete) {
+            Button {
+                isActive = false
+                onDelete()
+            } label: {
                 Image(systemName: "trash.fill")
                     .font(.system(size: 22))
                     .foregroundColor(.red)
             }
             Spacer()
-            ColorPicker("", selection: $element.color)
+            ColorPicker("", selection: $color)
                 .labelsHidden()
                 .frame(width: 32, height: 32)
             fontButton(index: 0)
@@ -98,26 +89,22 @@ struct TextOverlayView: View {
     private func fontButton(index: Int) -> some View {
         let fontDesigns: [Font.Design] = [.default, .rounded, .serif, .monospaced]
         let fontWeights: [Font.Weight] = [.light, .black, .regular, .bold]
-        let isSelected = element.fontSelection == index
-        return Button(action: { element.fontSelection = index }) {
+        let isSelected = fontSelection == index
+        return Button(action: { fontSelection = index }) {
             Text("Aa")
                 .font(.system(size: 20, weight: fontWeights[index], design: fontDesigns[index]))
-                .foregroundColor(isSelected ? .white : element.color)
+                .foregroundColor(isSelected ? .white : color)
                 .frame(width: 30, height: 30)
-                .background(isSelected ? element.color : Color.clear)
+                .background(isSelected ? color : Color.clear)
                 .cornerRadius(5)
         }
     }
 
     // MARK: Gestures
     private var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 0)
+        DragGesture()
             .onChanged { value in
                 location = value.location
-            }
-            .onEnded { value in
-                location = value.location
-                element.position = value.location
             }
     }
 
@@ -125,7 +112,7 @@ struct TextOverlayView: View {
         MagnificationGesture()
             .onChanged { value in
                 let delta = value / lastMagnification
-                element.scale = max(0.3, element.scale * delta)
+                scale = max(0.3, scale * delta)
                 lastMagnification = value
             }
             .onEnded { _ in

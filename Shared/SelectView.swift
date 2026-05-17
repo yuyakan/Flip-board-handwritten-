@@ -42,7 +42,9 @@ struct SelectView: View {
                                         .frame(width: geometry.size.height / 1.4)
                                         .rotation3DEffect(Angle(degrees: (Double(geometry.frame(in: .global).minY) - height/2.5) / -8), axis: (x: -5, y: 0, 0))
                                         .onTapGesture {
-                                            interstitial.presentInterstitial(isShow: &isShowBoardView[index])
+                                            interstitial.presentInterstitial {
+                                                isShowBoardView[index] = true
+                                            }
                                         }
                                     
                                 }
