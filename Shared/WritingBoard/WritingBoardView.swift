@@ -123,7 +123,7 @@ struct WritingBoardView: View {
             pencilKitViewController.unregister()
             rotateToPortrait()
         }
-        .onChange(of: boardMode) { newMode in
+        .onChange(of: boardMode) { _, newMode in
             switch newMode {
             case .draw:
                 pencilKitViewController.register(pkCanvasView)
@@ -132,9 +132,9 @@ struct WritingBoardView: View {
                 pencilKitViewController.unregister()
             }
         }
-        .onChange(of: penKind) { _ in applyPenTool() }
-        .onChange(of: penColor) { _ in applyPenTool() }
-        .onChange(of: penWidth) { _ in applyPenTool() }
+        .onChange(of: penKind) { applyPenTool() }
+        .onChange(of: penColor) { applyPenTool() }
+        .onChange(of: penWidth) { applyPenTool() }
         .sheet(isPresented: $isShowingPhotoPicker) {
             PhotoPickerView(selectedImage: $customBackground)
         }
