@@ -15,32 +15,6 @@ enum BoardMode {
     case draw, text, display
 }
 
-// MARK: - Orientation helpers
-
-private func rotateToPortrait() {
-    AppDelegate.orientationLock = .portrait
-    if #available(iOS 16.0, *) {
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-        scene.windows.first?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
-    } else {
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-        UINavigationController.attemptRotationToDeviceOrientation()
-    }
-}
-
-private func rotateToLandscape() {
-    AppDelegate.orientationLock = .landscapeRight
-    if #available(iOS 16.0, *) {
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
-        scene.windows.first?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
-    } else {
-        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-        UINavigationController.attemptRotationToDeviceOrientation()
-    }
-}
-
 // MARK: - WritingBoardView
 
 struct WritingBoardView: View {
@@ -117,11 +91,9 @@ struct WritingBoardView: View {
             customBackground = initialCustomBackground
             pencilKitViewController.register(pkCanvasView)
             applyPenTool()
-            rotateToLandscape()
         }
         .onDisappear {
             pencilKitViewController.unregister()
-            rotateToPortrait()
         }
         .onChange(of: boardMode) { _, newMode in
             switch newMode {
