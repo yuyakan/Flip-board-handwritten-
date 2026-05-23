@@ -8,23 +8,13 @@
 import SwiftUI
 import UIKit
 import GoogleMobileAds
-import AppTrackingTransparency
-import AdSupport
 
-func requestIDFA() {
-  ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-    // Tracking authorization completed. Start loading ads here.
-    // loadAd()
-  })
-}
- 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        requestIDFA()
         return true
     }
-    
+
     static var orientationLock = UIInterfaceOrientationMask.landscape
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -35,6 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Flip_board__handwritten_App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
             SelectView()

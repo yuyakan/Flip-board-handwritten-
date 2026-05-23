@@ -13,6 +13,7 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
 
     var interstitialAd: GADInterstitialAd?
     private var onDismiss: (() -> Void)?
+    private var presentCount: Int = 0
 
     override init() {
         super.init()
@@ -20,7 +21,8 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
 
     // リワード広告の読み込み
     func loadInterstitial() {
-        let id = "ca-app-pub-3940256099942544/4411468910" //テスト
+        // let id = "ca-app-pub-3940256099942544/4411468910" // テスト
+        let id = "ca-app-pub-3155724310732667/8334696722" // 本番
         GADInterstitialAd.load(withAdUnitID: id, request: GADRequest()) { (ad, error) in
             if let _ = error {
                 print("😭: 読み込みに失敗しました")
@@ -35,7 +37,15 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     }
 
     // インタースティシャル広告の表示（広告閉鎖後に onDismiss を発火）
+    // 2回に1回表示（1回目は表示、2回目はスキップ、3回目は表示...）
     func presentInterstitial(onDismiss: @escaping () -> Void) {
+        presentCount += 1
+        guard presentCount % 2 == 1 else {
+            print("⏭️: 今回は広告をスキップしました (\(presentCount)回目)")
+            onDismiss()
+            return
+        }
+
         let scenes = UIApplication.shared.connectedScenes
         let windowScenes = scenes.first as? UIWindowScene
         let root = windowScenes?.keyWindow?.rootViewController

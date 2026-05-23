@@ -51,9 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flip_board__handwritten___iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Flip_board__handwritten___iOS_.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C133273F3934E069C14BED4 /* TextOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlayView.swift; sourceTree = "<group>"; };
-		388CFFAF851E72EEA7CF9574 /* Pods_Flip_board__handwritten___macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flip_board__handwritten___macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		388CFFAF851E72EEA7CF9574 /* Pods_Flip_board__handwritten___macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Flip_board__handwritten___macOS_.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingBoardView.swift; sourceTree = "<group>"; };
 		4B7E000C27CCD2DE00783AF4 /* Flip_board__handwritten_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip_board__handwritten_App.swift; sourceTree = "<group>"; };
 		4B7E000D27CCD2DE00783AF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
@@ -408,9 +408,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -676,7 +680,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Flip-board--handwritten---iOS--Info.plist";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "最適な広告が表示されます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -689,7 +692,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "kanbe1365.Flip-board--handwritten-";
 				PRODUCT_NAME = "Flip board -handwritten-";
 				SDKROOT = iphoneos;
@@ -711,7 +714,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Flip-board--handwritten---iOS--Info.plist";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "最適な広告が表示されます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -724,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "kanbe1365.Flip-board--handwritten-";
 				PRODUCT_NAME = "Flip board -handwritten-";
 				SDKROOT = iphoneos;

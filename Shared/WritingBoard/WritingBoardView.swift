@@ -60,6 +60,7 @@ struct WritingBoardView: View {
                     HStack(spacing: 0) {
                         sideToolbar
                             .padding(.leading, geo.safeAreaInsets.leading)
+                            .padding(.top, geo.safeAreaInsets.top)
                         canvasArea(isLandscape: true)
                     }
                     Group {
@@ -72,7 +73,7 @@ struct WritingBoardView: View {
                             EmptyView()
                         }
                     }
-                    .padding(.trailing, max(geo.safeAreaInsets.trailing, 8))
+                    .padding(.trailing, geo.safeAreaInsets.trailing)
                 }
                 .frame(width: geo.size.width + geo.safeAreaInsets.leading + geo.safeAreaInsets.trailing,
                        height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom)
@@ -244,13 +245,13 @@ struct WritingBoardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: geo.size.width, height: geo.size.height)
-                            .offset(x: -50)
+                            .offset(x: -20)
                     } else if let name = imageName {
                         Image("\(name)_landscape")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: geo.size.width, height: geo.size.height)
-                            .offset(x: -50)
+                            .offset(x: -20)
                     }
                 } else {
                     let canvasHeight: CGFloat = geo.size.width > 700 ? geo.size.width : geo.size.width * 1.5
@@ -288,6 +289,7 @@ struct WritingBoardView: View {
                 }
             }
             .frame(width: geo.size.width, height: geo.size.height)
+            .clipped()
         }
         .ignoresSafeArea(edges: isLandscape ? .all : [])
     }
@@ -296,17 +298,12 @@ struct WritingBoardView: View {
 
     private var addTextButton: some View {
         Button(action: addTextElement) {
-            VStack(spacing: 6) {
-                Image(systemName: "plus.circle.fill")
-                    .font(.system(size: 40))
-                Text("追加")
-                    .font(.system(size: 13, weight: .semibold))
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 12)
-            .foregroundStyle(Color(.label))
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            Image(systemName: "plus.circle.fill")
+                .font(.system(size: 30))
+                .padding(10)
+                .foregroundStyle(Color(.label))
+                .background(.ultraThinMaterial)
+                .clipShape(Circle())
         }
     }
 
