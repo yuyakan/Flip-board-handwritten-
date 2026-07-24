@@ -8,18 +8,18 @@
 import SwiftUI
 import GoogleMobileAds
 
-typealias AdView = BannerView
+typealias AdView = BannerAdView
 
-struct BannerView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> BannerViewController {
-        BannerViewController()
+struct BannerAdView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> BannerAdViewController {
+        BannerAdViewController()
     }
 
-    func updateUIViewController(_ uiViewController: BannerViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: BannerAdViewController, context: Context) {}
 }
 
-final class BannerViewController: UIViewController {
-    private var bannerView: GADBannerView?
+final class BannerAdViewController: UIViewController {
+    private var bannerView: BannerView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +40,10 @@ final class BannerViewController: UIViewController {
 
     private func loadBanner() {
         let frame = view.frame.isEmpty ? UIScreen.main.bounds : view.frame
-        let adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(frame.width)
+        let adSize = largeAnchoredAdaptiveBanner(width: frame.width)
 
         if bannerView == nil {
-            let banner = GADBannerView(adSize: adSize)
+            let banner = BannerView(adSize: adSize)
             // banner.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト
             banner.adUnitID = "ca-app-pub-3155724310732667/8877317702" // 本番
             banner.rootViewController = self
@@ -57,6 +57,6 @@ final class BannerViewController: UIViewController {
         } else {
             bannerView?.adSize = adSize
         }
-        bannerView?.load(GADRequest())
+        bannerView?.load(Request())
     }
 }

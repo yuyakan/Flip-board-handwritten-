@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1C39767A6E4A4BFDA8C0AB93 /* TextOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C133273F3934E069C14BED4 /* TextOverlayView.swift */; };
-		3C02DD48630FD1C0A5269BE2 /* Pods_Flip_board__handwritten___macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388CFFAF851E72EEA7CF9574 /* Pods_Flip_board__handwritten___macOS_.framework */; };
+		858DB659D8B54738818F5FBB /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */; };
+		E75372A322094A76B97B9864 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */; };
+		B302A4CCC8B84D9091CDEBA4 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */; };
 		4B5AE93C2B06758800DA7FE6 /* WritingBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */; };
 		4B5AE93D2B06758800DA7FE6 /* WritingBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */; };
 		4B7E002527CCD2E000783AF4 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E002427CCD2E000783AF4 /* Tests_iOS.swift */; };
@@ -26,11 +28,11 @@
 		4B93F91C2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
 		4B93F91D2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
 		4BE3E9582B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
+		BCEBEB185B6340BEA3E3B78D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65FF20DCE34141F783A67503 /* InfoPlist.strings */; };
 		4BE3E9592B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
 		4BE3E9722B0A3635003A4F26 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */; };
 		4BE3E9732B0A3635003A4F26 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */; };
 		66EF46DEB7A743ED9E54788E /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E00DC09BAA4D12A5298CD3 /* PhotoPickerView.swift */; };
-		9F56649C672D0319860A5A84 /* Pods_Flip_board__handwritten___iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Flip_board__handwritten___iOS_.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C133273F3934E069C14BED4 /* TextOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlayView.swift; sourceTree = "<group>"; };
-		388CFFAF851E72EEA7CF9574 /* Pods_Flip_board__handwritten___macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Flip_board__handwritten___macOS_.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingBoardView.swift; sourceTree = "<group>"; };
 		4B7E000C27CCD2DE00783AF4 /* Flip_board__handwritten_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip_board__handwritten_App.swift; sourceTree = "<group>"; };
 		4B7E000D27CCD2DE00783AF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
@@ -68,6 +68,7 @@
 		4B7E003027CCD2E000783AF4 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4B7E003227CCD2E000783AF4 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		4B905F6C27CE47650074CC87 /* Flip-board--handwritten---iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flip-board--handwritten---iOS--Info.plist"; sourceTree = "<group>"; };
+		46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		4B93F9182833CC0A0076288F /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		4B93F91B2833CC700076288F /* pencilKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pencilKitViewController.swift; sourceTree = "<group>"; };
 		4BE3E95C2B086822003A4F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -79,12 +80,17 @@
 		4BE3E9692B0868FD003A4F26 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BE3E96A2B086900003A4F26 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BE3E96B2B086903003A4F26 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		40026DF1752A400384CF5F31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9091F3C98F3D4DBB94AC1665 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C4454E502C9D46ACBD54B461 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		873C76173F1F4212B4BDE888 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8B9D48C061DC4E0CADFAEA07 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CC5F4BD15C1844BEB2799F56 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8DE8F7BB6F7842D897AFE5C7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		36952723D42E4B07B9FABB62 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5808FA2568C44FDBA686FBC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
-		983DDB019FA60D0682246A39 /* Pods-Flip board -handwritten- (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (iOS).release.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS).release.xcconfig"; sourceTree = "<group>"; };
-		D24B90CF871A7377036AA897 /* Pods-Flip board -handwritten- (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (macOS).release.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (macOS)/Pods-Flip board -handwritten- (macOS).release.xcconfig"; sourceTree = "<group>"; };
 		E0E00DC09BAA4D12A5298CD3 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
-		E31A50A1CE830BABC615606A /* Pods-Flip board -handwritten- (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (iOS).debug.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS).debug.xcconfig"; sourceTree = "<group>"; };
-		EE28D5DAA8ECD58B45E93C24 /* Pods-Flip board -handwritten- (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flip board -handwritten- (macOS).debug.xcconfig"; path = "Target Support Files/Pods-Flip board -handwritten- (macOS)/Pods-Flip board -handwritten- (macOS).debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F56649C672D0319860A5A84 /* Pods_Flip_board__handwritten___iOS_.framework in Frameworks */,
+				858DB659D8B54738818F5FBB /* GoogleMobileAds in Frameworks */,
+				E75372A322094A76B97B9864 /* GoogleUserMessagingPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C02DD48630FD1C0A5269BE2 /* Pods_Flip_board__handwritten___macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +154,6 @@
 				4B7E002327CCD2E000783AF4 /* Tests iOS */,
 				4B7E002F27CCD2E000783AF4 /* Tests macOS */,
 				4B7E001427CCD2E000783AF4 /* Products */,
-				D6F7CB6DFE951D6E32B4F6E3 /* Pods */,
-				879B4FFCE9D3949F94D6590F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +166,7 @@
 				4BE3E9702B0A3621003A4F26 /* Ad */,
 				092613C0437F400B999F2AAB /* PhotoPicker */,
 				4BE3E95B2B086820003A4F26 /* Localizable.strings */,
+				65FF20DCE34141F783A67503 /* InfoPlist.strings */,
 				4B7E000E27CCD2E000783AF4 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -209,28 +214,9 @@
 			children = (
 				4B93F9182833CC0A0076288F /* AdView.swift */,
 				4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */,
+				46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */,
 			);
 			path = Ad;
-			sourceTree = "<group>";
-		};
-		879B4FFCE9D3949F94D6590F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				12A519BD415F4FD6111AD6C9 /* Pods_Flip_board__handwritten___iOS_.framework */,
-				388CFFAF851E72EEA7CF9574 /* Pods_Flip_board__handwritten___macOS_.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D6F7CB6DFE951D6E32B4F6E3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E31A50A1CE830BABC615606A /* Pods-Flip board -handwritten- (iOS).debug.xcconfig */,
-				983DDB019FA60D0682246A39 /* Pods-Flip board -handwritten- (iOS).release.xcconfig */,
-				EE28D5DAA8ECD58B45E93C24 /* Pods-Flip board -handwritten- (macOS).debug.xcconfig */,
-				D24B90CF871A7377036AA897 /* Pods-Flip board -handwritten- (macOS).release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,17 +226,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B7E003C27CCD2E000783AF4 /* Build configuration list for PBXNativeTarget "Flip board -handwritten- (iOS)" */;
 			buildPhases = (
-				871A30946CA2E794F7BD96F7 /* [CP] Check Pods Manifest.lock */,
 				4B7E000F27CCD2E000783AF4 /* Sources */,
 				4B7E001027CCD2E000783AF4 /* Frameworks */,
 				4B7E001127CCD2E000783AF4 /* Resources */,
-				83F3590A3F9F58CA0006075C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Flip board -handwritten- (iOS)";
+			packageProductDependencies = (
+				A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */,
+				659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */,
+			);
 			productName = "Flip board -handwritten- (iOS)";
 			productReference = 4B7E001327CCD2E000783AF4 /* Flip board -handwritten-.app */;
 			productType = "com.apple.product-type.application";
@@ -259,7 +247,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B7E003F27CCD2E000783AF4 /* Build configuration list for PBXNativeTarget "Flip board -handwritten- (macOS)" */;
 			buildPhases = (
-				DC2E5E8D76E295AA2055EE1B /* [CP] Check Pods Manifest.lock */,
 				4B7E001527CCD2E000783AF4 /* Sources */,
 				4B7E001627CCD2E000783AF4 /* Frameworks */,
 				4B7E001727CCD2E000783AF4 /* Resources */,
@@ -352,6 +339,10 @@
 				"pt-BR",
 			);
 			mainGroup = 4B7E000627CCD2DE00783AF4;
+			packageReferences = (
+				B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				9CEFC483ECD34E8D8F4D64D6 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
+			);
 			productRefGroup = 4B7E001427CCD2E000783AF4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -371,6 +362,7 @@
 			files = (
 				4B7E003827CCD2E000783AF4 /* Assets.xcassets in Resources */,
 				4BE3E9582B086820003A4F26 /* Localizable.strings in Resources */,
+				BCEBEB185B6340BEA3E3B78D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,74 +391,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		83F3590A3F9F58CA0006075C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flip board -handwritten- (iOS)/Pods-Flip board -handwritten- (iOS)-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		871A30946CA2E794F7BD96F7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Flip board -handwritten- (iOS)-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC2E5E8D76E295AA2055EE1B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Flip board -handwritten- (macOS)-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		4B7E000F27CCD2E000783AF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -477,6 +401,7 @@
 				4B93F91C2833CC700076288F /* pencilKitViewController.swift in Sources */,
 				4B7E003427CCD2E000783AF4 /* Flip_board__handwritten_App.swift in Sources */,
 				4BE3E9722B0A3635003A4F26 /* InterstitialAd.swift in Sources */,
+				B302A4CCC8B84D9091CDEBA4 /* ConsentManager.swift in Sources */,
 				4B5AE93C2B06758800DA7FE6 /* WritingBoardView.swift in Sources */,
 				1C39767A6E4A4BFDA8C0AB93 /* TextOverlayView.swift in Sources */,
 				66EF46DEB7A743ED9E54788E /* PhotoPickerView.swift in Sources */,
@@ -544,6 +469,22 @@
 				4BE3E96B2B086903003A4F26 /* es */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		65FF20DCE34141F783A67503 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40026DF1752A400384CF5F31 /* en */,
+				9091F3C98F3D4DBB94AC1665 /* fr */,
+				C4454E502C9D46ACBD54B461 /* zh-Hans */,
+				873C76173F1F4212B4BDE888 /* de */,
+				8B9D48C061DC4E0CADFAEA07 /* ja */,
+				CC5F4BD15C1844BEB2799F56 /* ko */,
+				8DE8F7BB6F7842D897AFE5C7 /* pt-BR */,
+				36952723D42E4B07B9FABB62 /* ru */,
+				D5808FA2568C44FDBA686FBC /* es */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -670,7 +611,6 @@
 		};
 		4B7E003D27CCD2E000783AF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E31A50A1CE830BABC615606A /* Pods-Flip board -handwritten- (iOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -704,7 +644,6 @@
 		};
 		4B7E003E27CCD2E000783AF4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 983DDB019FA60D0682246A39 /* Pods-Flip board -handwritten- (iOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -739,7 +678,6 @@
 		};
 		4B7E004027CCD2E000783AF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE28D5DAA8ECD58B45E93C24 /* Pods-Flip board -handwritten- (macOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -770,7 +708,6 @@
 		};
 		4B7E004127CCD2E000783AF4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D24B90CF871A7377036AA897 /* Pods-Flip board -handwritten- (macOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -921,6 +858,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = exactVersion;
+				version = 13.7.0;
+			};
+		};
+		9CEFC483ECD34E8D8F4D64D6 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CEFC483ECD34E8D8F4D64D6 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
+			productName = GoogleUserMessagingPlatform;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4B7E000727CCD2DE00783AF4 /* Project object */;
 }

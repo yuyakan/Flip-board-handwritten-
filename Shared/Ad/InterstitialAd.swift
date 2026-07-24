@@ -8,10 +8,10 @@
 import GoogleMobileAds
 import SwiftUI
 
-class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
+class Interstitial: NSObject, FullScreenContentDelegate, ObservableObject {
     @Published var interstitialAdLoaded: Bool = false
 
-    var interstitialAd: GADInterstitialAd?
+    private var interstitialAd: InterstitialAd?
     private var onDismiss: (() -> Void)?
     private var presentCount: Int = 0
 
@@ -19,20 +19,27 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
         super.init()
     }
 
-    // リワード広告の読み込み
+    // インタースティシャル広告の読み込み
     func loadInterstitial() {
+        Task { @MainActor in
+            await load()
+        }
+    }
+
+    @MainActor
+    private func load() async {
         // let id = "ca-app-pub-3940256099942544/4411468910" // テスト
         let id = "ca-app-pub-3155724310732667/8334696722" // 本番
-        GADInterstitialAd.load(withAdUnitID: id, request: GADRequest()) { (ad, error) in
-            if let _ = error {
-                print("😭: 読み込みに失敗しました")
-                self.interstitialAdLoaded = false
-                return
-            }
+        do {
+            let ad = try await InterstitialAd.load(with: id, request: Request())
+            ad.fullScreenContentDelegate = self
+            interstitialAd = ad
+            interstitialAdLoaded = true
             print("😍: 読み込みに成功しました")
-            self.interstitialAdLoaded = true
-            self.interstitialAd = ad
-            self.interstitialAd?.fullScreenContentDelegate = self
+        } catch {
+            interstitialAd = nil
+            interstitialAdLoaded = false
+            print("😭: 読み込みに失敗しました: \(error.localizedDescription)")
         }
     }
 
@@ -52,7 +59,7 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
 
         if let ad = interstitialAd, let root = root {
             self.onDismiss = onDismiss
-            ad.present(fromRootViewController: root)
+            ad.present(from: root)
             self.interstitialAdLoaded = false
         } else {
             print("😭: 広告の準備ができていませんでした")
@@ -63,7 +70,7 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     }
 
     // 失敗通知
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("インタースティシャル広告の表示に失敗しました")
         self.interstitialAdLoaded = false
         let dismiss = onDismiss
@@ -73,13 +80,13 @@ class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
     }
 
     // 表示通知
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("インタースティシャル広告を表示しました")
         self.interstitialAdLoaded = false
     }
 
     // クローズ通知
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("インタースティシャル広告を閉じました")
         self.interstitialAdLoaded = false
         self.interstitialAd = nil
