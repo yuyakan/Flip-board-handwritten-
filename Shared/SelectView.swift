@@ -86,9 +86,11 @@ struct SelectView: View {
                     }
                     .frame(maxHeight: .infinity)
 
-                    AdView()
-                        .frame(width: bannerWidth, height: bannerHeight)
-                        .padding(.top, bannerTopPadding)
+                    if !AdConfig.isHidden {
+                        AdView()
+                            .frame(width: bannerWidth, height: bannerHeight)
+                            .padding(.top, bannerTopPadding)
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onAppear {

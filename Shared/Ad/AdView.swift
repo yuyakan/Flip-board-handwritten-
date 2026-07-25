@@ -8,6 +8,13 @@
 import SwiftUI
 import GoogleMobileAds
 
+// 広告の一括制御フラグ。
+// スクリーンショット撮影などで広告を隠したいときは true にする。
+// リリース時は必ず false に戻すこと。
+enum AdConfig {
+    static let isHidden = false
+}
+
 typealias AdView = BannerAdView
 
 struct BannerAdView: UIViewControllerRepresentable {
@@ -44,8 +51,8 @@ final class BannerAdViewController: UIViewController {
 
         if bannerView == nil {
             let banner = BannerView(adSize: adSize)
-            banner.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト
-            // banner.adUnitID = "ca-app-pub-3155724310732667/8877317702" // 本番
+            // banner.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト
+            banner.adUnitID = "ca-app-pub-3155724310732667/8877317702" // 本番
             banner.rootViewController = self
             banner.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(banner)

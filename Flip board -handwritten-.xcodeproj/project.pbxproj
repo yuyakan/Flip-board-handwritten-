@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C39767A6E4A4BFDA8C0AB93 /* TextOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C133273F3934E069C14BED4 /* TextOverlayView.swift */; };
-		858DB659D8B54738818F5FBB /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */; };
-		E75372A322094A76B97B9864 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */; };
-		B302A4CCC8B84D9091CDEBA4 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */; };
 		4B5AE93C2B06758800DA7FE6 /* WritingBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */; };
 		4B5AE93D2B06758800DA7FE6 /* WritingBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */; };
 		4B7E002527CCD2E000783AF4 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E002427CCD2E000783AF4 /* Tests_iOS.swift */; };
@@ -28,11 +25,14 @@
 		4B93F91C2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
 		4B93F91D2833CC700076288F /* pencilKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F91B2833CC700076288F /* pencilKitViewController.swift */; };
 		4BE3E9582B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
-		BCEBEB185B6340BEA3E3B78D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65FF20DCE34141F783A67503 /* InfoPlist.strings */; };
 		4BE3E9592B086820003A4F26 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3E95B2B086820003A4F26 /* Localizable.strings */; };
 		4BE3E9722B0A3635003A4F26 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */; };
 		4BE3E9732B0A3635003A4F26 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */; };
 		66EF46DEB7A743ED9E54788E /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E00DC09BAA4D12A5298CD3 /* PhotoPickerView.swift */; };
+		858DB659D8B54738818F5FBB /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */; };
+		B302A4CCC8B84D9091CDEBA4 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */; };
+		BCEBEB185B6340BEA3E3B78D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65FF20DCE34141F783A67503 /* InfoPlist.strings */; };
+		E75372A322094A76B97B9864 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		2C133273F3934E069C14BED4 /* TextOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlayView.swift; sourceTree = "<group>"; };
+		36952723D42E4B07B9FABB62 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		40026DF1752A400384CF5F31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		4B5AE93B2B06758800DA7FE6 /* WritingBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingBoardView.swift; sourceTree = "<group>"; };
 		4B7E000C27CCD2DE00783AF4 /* Flip_board__handwritten_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flip_board__handwritten_App.swift; sourceTree = "<group>"; };
 		4B7E000D27CCD2DE00783AF4 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
@@ -68,7 +71,6 @@
 		4B7E003027CCD2E000783AF4 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4B7E003227CCD2E000783AF4 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		4B905F6C27CE47650074CC87 /* Flip-board--handwritten---iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flip-board--handwritten---iOS--Info.plist"; sourceTree = "<group>"; };
-		46D3AF3109ED42898A5AD7B8 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		4B93F9182833CC0A0076288F /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		4B93F91B2833CC700076288F /* pencilKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pencilKitViewController.swift; sourceTree = "<group>"; };
 		4BE3E95C2B086822003A4F26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -80,25 +82,29 @@
 		4BE3E9692B0868FD003A4F26 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BE3E96A2B086900003A4F26 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BE3E96B2B086903003A4F26 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		40026DF1752A400384CF5F31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9091F3C98F3D4DBB94AC1665 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C4454E502C9D46ACBD54B461 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		873C76173F1F4212B4BDE888 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8B9D48C061DC4E0CADFAEA07 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CC5F4BD15C1844BEB2799F56 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8DE8F7BB6F7842D897AFE5C7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		36952723D42E4B07B9FABB62 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D5808FA2568C44FDBA686FBC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E9EFD99BDF344134A4F0733C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		C8AC2B27427A48B2A146C66D /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		548425CCB4E549668E89DD10 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65F98B6A525D495EB25DFF73 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CEC3AD54ABF4FF98B067B8C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		9283FA6813ED4155BD3F9DEC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		76FFDC4B80944DBC914333AD /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		873C76173F1F4212B4BDE888 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8B9D48C061DC4E0CADFAEA07 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8DE8F7BB6F7842D897AFE5C7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		9091F3C98F3D4DBB94AC1665 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9283FA6813ED4155BD3F9DEC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BCD0C64439D2424EB13755D9 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BE3E9712B0A3635003A4F26 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
+		2604F175F68848258B3AB144 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		714CD6241C394403A9AF1034 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		86A8D5F4207742E2902FDD53 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		317B65315310471F80CB735C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4BB54D18F194770B21B6155 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C00F93DB018411AA7963ABC /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C4454E502C9D46ACBD54B461 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C8AC2B27427A48B2A146C66D /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CC5F4BD15C1844BEB2799F56 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5808FA2568C44FDBA686FBC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E0E00DC09BAA4D12A5298CD3 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		E9EFD99BDF344134A4F0733C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +355,9 @@
 				it,
 				hi,
 				th,
+				id,
+				sv,
+				vi,
 			);
 			mainGroup = 4B7E000627CCD2DE00783AF4;
 			packageReferences = (
@@ -483,6 +492,9 @@
 				C8AC2B27427A48B2A146C66D /* it */,
 				548425CCB4E549668E89DD10 /* hi */,
 				65F98B6A525D495EB25DFF73 /* th */,
+				2604F175F68848258B3AB144 /* id */,
+				714CD6241C394403A9AF1034 /* sv */,
+				86A8D5F4207742E2902FDD53 /* vi */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -503,6 +515,9 @@
 				9283FA6813ED4155BD3F9DEC /* it */,
 				76FFDC4B80944DBC914333AD /* hi */,
 				BCD0C64439D2424EB13755D9 /* th */,
+				317B65315310471F80CB735C /* id */,
+				A4BB54D18F194770B21B6155 /* sv */,
+				4C00F93DB018411AA7963ABC /* vi */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -635,7 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2NGCBTHK5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -652,7 +667,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kanbe1365.Flip-board--handwritten-";
 				PRODUCT_NAME = "Flip board -handwritten-";
 				SDKROOT = iphoneos;
@@ -668,7 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2NGCBTHK5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -685,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kanbe1365.Flip-board--handwritten-";
 				PRODUCT_NAME = "Flip board -handwritten-";
 				SDKROOT = iphoneos;
@@ -880,14 +895,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = exactVersion;
-				version = 13.7.0;
-			};
-		};
 		9CEFC483ECD34E8D8F4D64D6 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git";
@@ -896,18 +903,26 @@
 				version = 3.1.0;
 			};
 		};
+		B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = exactVersion;
+				version = 13.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
-		};
 		659874D9E062481C8B3BBFBB /* GoogleUserMessagingPlatform */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9CEFC483ECD34E8D8F4D64D6 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
 			productName = GoogleUserMessagingPlatform;
+		};
+		A670F1FA7BA641ECA2F573D5 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B95C82671A934B54BA10C988 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
