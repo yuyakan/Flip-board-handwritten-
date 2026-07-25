@@ -44,8 +44,8 @@ final class BannerAdViewController: UIViewController {
 
         if bannerView == nil {
             let banner = BannerView(adSize: adSize)
-            // banner.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト
-            banner.adUnitID = "ca-app-pub-3155724310732667/8877317702" // 本番
+            banner.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト
+            // banner.adUnitID = "ca-app-pub-3155724310732667/8877317702" // 本番
             banner.rootViewController = self
             banner.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(banner)

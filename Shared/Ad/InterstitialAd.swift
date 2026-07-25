@@ -6,6 +6,7 @@
 //
 
 import GoogleMobileAds
+import StoreKit
 import SwiftUI
 
 class Interstitial: NSObject, FullScreenContentDelegate, ObservableObject {
@@ -28,8 +29,8 @@ class Interstitial: NSObject, FullScreenContentDelegate, ObservableObject {
 
     @MainActor
     private func load() async {
-        // let id = "ca-app-pub-3940256099942544/4411468910" // テスト
-        let id = "ca-app-pub-3155724310732667/8334696722" // 本番
+        let id = "ca-app-pub-3940256099942544/4411468910" // テスト
+        // let id = "ca-app-pub-3155724310732667/8334696722" // 本番
         do {
             let ad = try await InterstitialAd.load(with: id, request: Request())
             ad.fullScreenContentDelegate = self
@@ -45,10 +46,12 @@ class Interstitial: NSObject, FullScreenContentDelegate, ObservableObject {
 
     // インタースティシャル広告の表示（広告閉鎖後に onDismiss を発火）
     // 2回に1回表示（1回目は表示、2回目はスキップ、3回目は表示...）
+    // 広告をスキップする偶数回目にはレビューダイアログをリクエストする。
     func presentInterstitial(onDismiss: @escaping () -> Void) {
         presentCount += 1
         guard presentCount % 2 == 1 else {
             print("⏭️: 今回は広告をスキップしました (\(presentCount)回目)")
+            requestReview()
             onDismiss()
             return
         }
@@ -97,5 +100,13 @@ class Interstitial: NSObject, FullScreenContentDelegate, ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             dismiss?()
         }
+    }
+
+    // レビューダイアログをリクエストする（表示するかはOSが判断する）
+    private func requestReview() {
+        let scenes = UIApplication.shared.connectedScenes
+        guard let windowScene = scenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+                ?? scenes.first as? UIWindowScene else { return }
+        SKStoreReviewController.requestReview(in: windowScene)
     }
 }
